@@ -8,7 +8,7 @@ where he died in 1519. Although he had no formal academic training, many histori
 scholars regard Leonardo as the prime exemplar of the "Renaissance Man" or "Universal Genius",
 an individual of "unquenchable curiosity" and "feverishly inventive imagination.
 " He is widely considered one of the most diversely talented individuals ever to have lived.
- According to art historian Helen Gardner, the scope and depth of his interests were without
+According to art historian Helen Gardner, the scope and depth of his interests were without
 precedent in recorded history, and "his mind and personality seem to us superhuman, while the man
 himself mysterious and remote." Scholars interpret his view of the world as being based in logic,
 though the empirical methods he used were unorthodox for his time. Leonardo is revered for his
@@ -21,35 +21,34 @@ the tensile strength of wire. He is also sometimes credited with the inventions 
 and tank. He made substantial discoveries in anatomy, civil engineering, geology, optics,
 and hydrodynamics, but he did not publish his findings and they had little to no direct influence on
 subsequent science.'''.lower()
+
 irrelevant_words = {".", ",", " a ", " the ", " and ", " he ", " she ", " it ",
-                    " is ", " but ", " at ", " to ", " was ", " can ", " ", " with ",
-                    " not ", " may ", " as ", " from ", " be ", " in ", " so ", ' day ',
+                    " is ", " but ", " at ", " to ", " was ", " can ", " ", " with ", " not ", " may ", " as ",
+                    " from ", " be ", " in ", " so ", ' day ',
                     " days ", " of ", " by ", " that ", " his ", " has ", '"', " or ", " on ", " or ", " his ",
                     " also "}
 
 
-# def word_list(list1):
-def clean(cleandata):
-    global irrelevant_words
-    for iw in irrelevant_words:
-        cleandata = cleandata.replace(iw, " ")
-    return cleandata
+def clean(data, irrelevant):
+    for word in irrelevant:
+        if word in data:
+            data = data.replace(word, ' ')
+    return data
 
 
-word_list = clean(davinci).split(" ")
-# print(clean(davinci))
-print(word_list)
+print(clean(davinci, irrelevant_words).split())
 
 
-def histogram(word_histogram):
-    global word_list
-    word_histogram = {}
-    for word in word_list:
-        if word not in word_histogram.keys():
-            word_histogram[word] = 1
+def word_histogram(data):
+    words_histogram ={}
+
+    for word in data.split():
+        if word in words_histogram:
+            words_histogram[word] += 1
         else:
-            word_histogram[word] = word_histogram[word] + 1
-    word_histogram.pop("")
+            words_histogram[word] = 1
+    return words_histogram
 
 
-print(histogram(word_list))
+print(word_histogram(davinci))
+
